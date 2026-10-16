@@ -89,7 +89,6 @@ export default function Home() {
             });
         };
 
-        // Keep content visible when animations are disabled or unsupported.
         if (
             window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
             !("IntersectionObserver" in window)
