@@ -7,8 +7,6 @@ const basePath =
 
 const nextConfig: NextConfig = {
     /* config options here */
-    cacheComponents: true,
-    partialPrefetching: true,
     output: "export",
     images: {
         unoptimized: true,
