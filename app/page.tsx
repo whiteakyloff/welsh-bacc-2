@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import logo from "../images/logo.png";
+import dragonLogo from "../images/logo_dragon.png";
 
 const instagramUrl = "https://www.instagram.com/eatwelsheatwell/";
 
@@ -138,7 +140,7 @@ export default function Home() {
                     aria-label="Eat Welsh, Eat Well home"
                 >
                     <Image
-                        src="/images/logo.png"
+                        src={logo}
                         alt="Eat Welsh, Eat Well dragon logo"
                         width={58}
                         height={58}
@@ -274,7 +276,7 @@ export default function Home() {
                     <div className="absolute left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f5c978]/30 max-[800px]:translate-x-0 max-[800px]:translate-y-0 h-[600px] w-[600px] max-[1100px]:h-[520px] max-[1100px]:w-[520px] max-[800px]:left-[calc(50%-217px)] max-[800px]:top-[-12%] max-[800px]:h-[435px] max-[800px]:w-[435px]" />
                     <Image
                         className="absolute left-[calc(50%-190px)] top-[18%] h-[380px] w-[380px] animate-dragon-float object-contain drop-shadow-[15px_21px_0_rgba(17,47,34,.3)] max-[1100px]:left-[calc(50%-165px)] max-[1100px]:h-[330px] max-[1100px]:w-[330px] max-[800px]:left-[calc(50%-135px)] max-[800px]:top-[12%] max-[800px]:h-[270px] max-[800px]:w-[270px]"
-                        src="/images/logo_dragon.png"
+                        src={dragonLogo}
                         alt=""
                         width={500}
                         height={500}
@@ -572,7 +574,7 @@ export default function Home() {
             <footer className="flex items-center justify-between bg-deep-green px-[9vw] py-10 text-white max-[800px]:block max-[800px]:px-[7vw] max-[800px]:py-[35px]">
                 <div className="flex items-center gap-[13px]">
                     <Image
-                        src="/images/logo.png"
+                        src={logo}
                         alt=""
                         width={72}
                         height={72}
