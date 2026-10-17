@@ -130,6 +130,39 @@ export default function Home() {
         return () => document.removeEventListener("keydown", closeOnEscape);
     }, []);
 
+    useEffect(() => {
+        const themeColor = document.querySelector<HTMLMetaElement>(
+            'meta[name="theme-color"]',
+        );
+        const sections = Array.from(
+            document.querySelectorAll<HTMLElement>("[data-theme-color]"),
+        );
+        if (!themeColor || sections.length === 0) return;
+
+        let frame = 0;
+        const updateThemeColor = () => {
+            cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => {
+                const section = sections.find(
+                    (element) => element.getBoundingClientRect().bottom > 1,
+                );
+                const color = section?.dataset.themeColor;
+                if (color && themeColor.content !== color) {
+                    themeColor.content = color;
+                }
+            });
+        };
+
+        updateThemeColor();
+        window.addEventListener("scroll", updateThemeColor, { passive: true });
+        window.addEventListener("resize", updateThemeColor);
+        return () => {
+            cancelAnimationFrame(frame);
+            window.removeEventListener("scroll", updateThemeColor);
+            window.removeEventListener("resize", updateThemeColor);
+        };
+    }, []);
+
     return (
         <main className="overflow-x-clip">
             <header className="absolute z-50 flex h-[86px] w-full items-center justify-between px-[5vw] text-white max-[800px]:px-[6vw]">
@@ -222,6 +255,7 @@ export default function Home() {
             </header>
 
             <section
+                data-theme-color="#173b2d"
                 className="relative flex min-h-[720px] overflow-hidden bg-deep-green px-[9vw] pb-20 pt-[150px] text-white max-[1100px]:min-h-[650px] max-[1100px]:px-[7vw] max-[800px]:min-h-0 max-[800px]:flex-col max-[800px]:pb-[55px] max-[800px]:pt-[130px]"
                 id="top"
             >
@@ -301,6 +335,7 @@ export default function Home() {
             </section>
 
             <section
+                data-theme-color="#fffcf6"
                 data-reveal
                 className="mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
                 id="about"
@@ -358,6 +393,7 @@ export default function Home() {
             </section>
 
             <section
+                data-theme-color="#244936"
                 data-reveal
                 className="w-full bg-welsh-green text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
                 id="discover"
@@ -427,6 +463,7 @@ export default function Home() {
             </section>
 
             <section
+                data-theme-color="#fffcf6"
                 data-reveal
                 className="mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
                 id="why-welsh"
@@ -471,6 +508,7 @@ export default function Home() {
             </section>
 
             <section
+                data-theme-color="#d95348"
                 data-reveal
                 className="bg-[#d95348] text-white opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
             >
@@ -526,6 +564,7 @@ export default function Home() {
             </section>
 
             <section
+                data-theme-color="#fffcf6"
                 data-reveal
                 className="grid grid-cols-2 items-center gap-[14%] max-[800px]:grid-cols-1 max-[800px]:gap-[35px] mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
                 id="get-involved"
@@ -571,7 +610,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <footer className="flex items-center justify-between bg-deep-green px-[9vw] py-10 text-white max-[800px]:block max-[800px]:px-[7vw] max-[800px]:py-[35px]">
+            <footer data-theme-color="#173b2d" className="flex items-center justify-between bg-deep-green px-[9vw] py-10 text-white max-[800px]:block max-[800px]:px-[7vw] max-[800px]:py-[35px]">
                 <div className="flex items-center gap-[13px]">
                     <Image
                         src={logo}

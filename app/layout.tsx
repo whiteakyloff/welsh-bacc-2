@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,6 +16,10 @@ export const metadata: Metadata = {
     title: "Eat Welsh, Eat Well | Choose local. Eat well. Support Wales.",
     description:
         "Discover Welsh food producers and make local, informed food choices with Eat Welsh, Eat Well.",
+};
+
+export const viewport: Viewport = {
+    themeColor: "#173b2d",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
