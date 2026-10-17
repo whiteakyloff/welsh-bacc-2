@@ -44,7 +44,7 @@
     @keyframes art-in {
         from {
             opacity: 0;
-            transform: translateX(25px) scale(0.96);
+            transform: translateX(25px) scale(0.99);
         }
         to {
             opacity: 1;
@@ -71,6 +71,7 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        background: #173b2d;
     }
     body {
         margin: 0;
