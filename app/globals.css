@@ -13,7 +13,9 @@
     --font-display: Georgia, serif;
 }
 
-@theme {
+/* inline: utilities get the values directly, so var(--badge-delay) resolves on the
+   element (it's set on <main> via revealVars), not on :root where it doesn't exist. */
+@theme inline {
     --animate-rise-in: rise-in 0.8s both cubic-bezier(0.2, 0.7, 0.2, 1);
     --animate-item-in: item-in 0.7s both cubic-bezier(0.2, 0.7, 0.2, 1);
     --animate-art-in: art-in 1.4s both 0.15s cubic-bezier(0.22, 1, 0.36, 1);
