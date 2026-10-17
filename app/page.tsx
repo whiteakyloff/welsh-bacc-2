@@ -169,7 +169,7 @@ export default function Home() {
                     const nextColor = nextSection.dataset.themeColor;
                     const distanceToBoundary =
                         section.getBoundingClientRect().bottom;
-                    const blendDistance = 120;
+                    const blendDistance = 60;
 
                     if (nextColor && distanceToBoundary < blendDistance) {
                         color = blendColors(
