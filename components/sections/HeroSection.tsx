@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import dragonLogo from "@/images/logo_dragon.png";
+import dragonLogo from "@/images/logo-dragon.webp";
 import { Icon } from "@/components/ui/Icon";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 import { sectionColors } from "@/lib/theme";
@@ -44,7 +44,10 @@ export function HeroSection() {
                     </ScrollButton>
                 </div>
                 <div className="mt-[30px] flex items-center gap-[13px] text-[11px] leading-normal text-[#bfcec2] max-[800px]:my-[35px] max-[800px]:mb-10 animate-item-in [animation-delay:550ms] [&_strong]:text-white">
-                    <Icon name="asterisk" className="animate-pulse-mark text-2xl text-[#e45144]" />
+                    <Icon
+                        name="asterisk"
+                        className="animate-pulse-mark text-2xl text-[#e45144]"
+                    />
                     <p>
                         <strong>Small choices add up.</strong>
                         <br />
@@ -74,8 +77,9 @@ function HeroArt() {
                 className="absolute left-[calc(50%-190px)] top-[18%] h-[380px] w-[380px] animate-dragon-float object-contain drop-shadow-[15px_21px_0_rgba(17,47,34,.3)] max-[1100px]:left-[calc(50%-165px)] max-[1100px]:h-[330px] max-[1100px]:w-[330px] max-[800px]:left-[calc(50%-135px)] max-[800px]:top-[12%] max-[800px]:h-[270px] max-[800px]:w-[270px]"
                 src={dragonLogo}
                 alt=""
-                width={500}
-                height={500}
+                width={760}
+                height={760}
+                preload
             />
             <HeroBadge className="right-[8%] top-[20%] rotate-6 hover:rotate-4 max-[800px]:top-[17%]">
                 Locally
@@ -91,7 +95,13 @@ function HeroArt() {
     );
 }
 
-function HeroBadge({ className, children }: { className: string; children: ReactNode }) {
+function HeroBadge({
+    className,
+    children,
+}: {
+    className: string;
+    children: ReactNode;
+}) {
     return (
         <div
             className={`absolute bg-paper px-[18px] py-[15px] font-display text-xs font-bold leading-[1.15] text-ink shadow-[4px_5px_0_#d54a3d] transition-[translate,rotate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[7px_8px_0_#d54a3d] max-[800px]:px-[13px] max-[800px]:py-[11px] max-[800px]:text-[10px] ${className}`}

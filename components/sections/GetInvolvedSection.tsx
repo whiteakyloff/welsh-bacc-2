@@ -42,7 +42,10 @@ export function GetInvolvedSection() {
 function FestivalCard() {
     return (
         <div className="relative bg-cream p-[45px] before:absolute before:inset-y-0 before:left-0 before:w-[6px] before:bg-[#f1be69] max-[800px]:p-[30px]">
-            <Icon name="asterisk" className="animate-pulse-mark text-[28px] text-[#d54a3d]" />
+            <Icon
+                name="asterisk"
+                className="animate-pulse-mark text-[28px] text-[#d54a3d]"
+            />
             <p className="mt-[27px] text-[13px] font-bold uppercase leading-[1.7] tracking-[.17em] text-muted">
                 A future idea
             </p>

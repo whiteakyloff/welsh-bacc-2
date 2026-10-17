@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Icon } from "@/components/ui/Icon";
 import { useHeldPress } from "@/hooks/useHeldPress";
 import type { Producer } from "@/lib/content";
@@ -24,13 +25,28 @@ export function ProducerCard({ producer }: { producer: Producer }) {
     return (
         <article className="group h-full overflow-hidden rounded-[3px] bg-paper text-ink transition-[translate,box-shadow] duration-[350ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_18px_30px_rgba(15,43,31,.2)]">
             <div
-                className={`relative flex h-[180px] items-center justify-center max-[800px]:h-[145px] ${producer.accentClassName}`}
+                className={`relative flex h-[200px] items-center justify-center overflow-hidden max-[800px]:h-[165px] ${producer.accentClassName}`}
             >
-                <Icon
-                    name={producer.icon}
-                    className="text-[115px] leading-none text-white/80 transition-transform duration-[450ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.08] group-hover:-rotate-[5deg]"
+                {/* Rings echoing the hero illustration */}
+                <span
+                    aria-hidden="true"
+                    className="absolute size-[210px] rounded-full border border-white/35 max-[800px]:size-[175px]"
                 />
-                <span className="absolute bottom-[14px] left-[17px] bg-white/85 px-[9px] py-[6px] text-[9px] font-bold uppercase tracking-[.1em] text-ink">
+                <span
+                    aria-hidden="true"
+                    className="absolute size-[290px] rounded-full border border-white/20 max-[800px]:size-[240px]"
+                />
+                {/* Cream plate so every badge reads as the same kind of sticker */}
+                <div className="relative flex size-[148px] items-center justify-center rounded-full bg-paper p-2.5 shadow-[6px_8px_0_rgba(17,47,34,.18)] ring-[3px] ring-white/60 transition-transform duration-[450ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.06] group-hover:-rotate-[5deg] max-[800px]:size-[122px] max-[800px]:p-2">
+                    <Image
+                        src={producer.badge}
+                        alt={`${producer.name} badge`}
+                        width={128}
+                        height={128}
+                        className="size-full object-contain"
+                    />
+                </div>
+                <span className="absolute left-[17px] top-[14px] bg-white/85 px-[9px] py-[6px] text-[9px] font-bold uppercase tracking-[.1em] text-ink">
                     {producer.category}
                 </span>
             </div>

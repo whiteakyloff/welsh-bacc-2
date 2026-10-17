@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/images/logo.png";
+import logo from "@/images/logo-header.webp";
 import { sectionColors } from "@/lib/theme";
 
 export function SiteFooter() {

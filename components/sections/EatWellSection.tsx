@@ -31,7 +31,10 @@ export function EatWellSection() {
                             key={tip.title}
                             className="grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px]"
                         >
-                            <Icon name="star_shine" className="text-xl text-[#f5c978]" />
+                            <Icon
+                                name="star_shine"
+                                className="text-xl text-[#f5c978]"
+                            />
                             <strong className="font-display text-xl font-normal">
                                 {tip.title}
                             </strong>

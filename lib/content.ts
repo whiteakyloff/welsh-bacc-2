@@ -1,9 +1,15 @@
+import type { StaticImageData } from "next/image";
+import bakeryBadge from "@/images/bakery-badge.webp";
+import dairyBadge from "@/images/dairy-badge.webp";
+import joesBadge from "@/images/joes-badge.webp";
+
 // Copy and data shown on the page. Edit text here rather than in the components.
 
 export const INSTAGRAM_URL = "https://www.instagram.com/eatwelsheatwell/";
 export const INSTAGRAM_HANDLE = "@eatwelsheatwell";
 
-export type SectionId = "top" | "about" | "discover" | "why-welsh" | "get-involved";
+export type SectionId =
+    "top" | "about" | "discover" | "why-welsh" | "get-involved";
 
 export const navLinks: { target: SectionId; label: string }[] = [
     { target: "about", label: "About" },
@@ -37,8 +43,8 @@ export type Producer = {
     description: string;
     /** Tailwind background class for the card's illustration panel. */
     accentClassName: string;
-    /** Material Symbols icon name. */
-    icon: string;
+    /** Producer's own badge, shown on the card's illustration panel. */
+    badge: StaticImageData;
     link: string;
 };
 
@@ -50,7 +56,7 @@ export const producers: Producer[] = [
         description:
             "A local bakery example from the campaign research — a reminder to look for Welsh food on your doorstep.",
         accentClassName: "bg-[#e8a35f]",
-        icon: "bakery_dining",
+        badge: bakeryBadge,
         link: "https://www.instagram.com/davies_of_mumbles_/",
     },
     {
@@ -60,7 +66,7 @@ export const producers: Producer[] = [
         description:
             "A much-loved Welsh food name included in the project as an example of a local producer to discover.",
         accentClassName: "bg-[#e48b81]",
-        icon: "icecream",
+        badge: joesBadge,
         link: "https://www.joes-icecream.com/",
     },
     {
@@ -70,7 +76,7 @@ export const producers: Producer[] = [
         description:
             "Explore Welsh dairy products and make a considered choice that supports local food production.",
         accentClassName: "bg-[#e4d38c]",
-        icon: "glass_cup",
+        badge: dairyBadge,
         link: "https://villagedairy.co.uk/",
     },
 ];

@@ -53,7 +53,9 @@ export function useThemeColorSync() {
                         color = blendColors(
                             color,
                             nextColor,
-                            1 - Math.max(0, distanceToBoundary) / BLEND_DISTANCE,
+                            1 -
+                                Math.max(0, distanceToBoundary) /
+                                    BLEND_DISTANCE,
                         );
                     }
                 }

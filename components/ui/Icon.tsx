@@ -6,7 +6,10 @@ type IconProps = {
 
 export function Icon({ name, className = "" }: IconProps) {
     return (
-        <span className={`material-symbols-outlined ${className}`} aria-hidden="true">
+        <span
+            className={`material-symbols-outlined ${className}`}
+            aria-hidden="true"
+        >
             {name}
         </span>
     );
