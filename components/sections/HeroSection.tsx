@@ -67,6 +67,7 @@ function HeroArt() {
         <div
             className="absolute right-[-1%] top-[15%] h-[88%] w-[52%] animate-art-in max-[1023px]:relative max-[1023px]:right-auto max-[1023px]:top-auto max-[1023px]:mx-[-4vw] max-[1023px]:mb-[-55px] max-[1023px]:mt-[35px] max-[1023px]:h-[350px] max-[1023px]:w-[calc(100%+8vw)] max-[1023px]:shrink-0"
             aria-label="Illustration of a Welsh dragon and fresh local produce"
+            data-play-on-view
         >
             {/* Sun */}
             <div className="absolute left-[calc(50%-175px)] top-[21%] h-[350px] w-[350px] animate-sun-breathe rounded-full bg-[#edbd68] opacity-90 max-[1100px]:h-[310px] max-[1100px]:w-[310px] max-[1100px]:left-[calc(50%-155px)] max-[1023px]:left-[calc(50%-122px)] max-[1023px]:top-[17%] max-[1023px]:h-[245px] max-[1023px]:w-[245px]" />

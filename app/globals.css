@@ -104,6 +104,15 @@
     }
 }
 
+/* Stacked hero: the art sits below the fold, so hold its entrance (and the
+   labels' pop-in) until it scrolls into view. See usePlayOnView. */
+@media (max-width: 1023px) {
+    [data-play-on-view]:not([data-in-view]),
+    [data-play-on-view]:not([data-in-view]) * {
+        animation-play-state: paused;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
