@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 // How much of the element must be on screen before its animations start.
-const PLAY_THRESHOLD = 0.35;
+const PLAY_THRESHOLD = 0.25;
 
 /**
  * Marks every `[data-play-on-view]` element with `data-in-view="true"` once
