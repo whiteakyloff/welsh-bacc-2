@@ -140,13 +140,46 @@ export default function Home() {
         if (!themeColor || sections.length === 0) return;
 
         let frame = 0;
+        const blendColors = (from: string, to: string, amount: number) => {
+            const start = from.match(/[\da-f]{2}/gi);
+            const end = to.match(/[\da-f]{2}/gi);
+            if (!start || !end || start.length < 3 || end.length < 3) return to;
+
+            const channels = start.slice(0, 3).map((channel, index) => {
+                const value = Math.round(
+                    parseInt(channel, 16) * (1 - amount) +
+                        parseInt(end[index], 16) * amount,
+                );
+                return value.toString(16).padStart(2, "0");
+            });
+            return `#${channels.join("")}`;
+        };
+
         const updateThemeColor = () => {
             cancelAnimationFrame(frame);
             frame = requestAnimationFrame(() => {
-                const section = sections.find(
+                const boundaryIndex = sections.findIndex(
                     (element) => element.getBoundingClientRect().bottom > 1,
                 );
-                const color = section?.dataset.themeColor;
+                const section = sections[boundaryIndex];
+                const nextSection = sections[boundaryIndex + 1];
+                let color = section?.dataset.themeColor;
+
+                if (section && nextSection && color) {
+                    const nextColor = nextSection.dataset.themeColor;
+                    const distanceToBoundary =
+                        section.getBoundingClientRect().bottom;
+                    const blendDistance = 120;
+
+                    if (nextColor && distanceToBoundary < blendDistance) {
+                        color = blendColors(
+                            color,
+                            nextColor,
+                            1 - Math.max(0, distanceToBoundary) / blendDistance,
+                        );
+                    }
+                }
+
                 if (color && themeColor.content !== color) {
                     themeColor.content = color;
                 }
