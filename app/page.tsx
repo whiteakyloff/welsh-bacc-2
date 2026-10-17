@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import logo from "../images/logo.png";
 import dragonLogo from "../images/logo_dragon.png";
 import instagramIcon from "../images/instagram_icon.png";
@@ -120,6 +120,17 @@ const labelBase =
 
 export default function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [pressedLink, setPressedLink] = useState<string | null>(null);
+    const pressedTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+    // On touch devices :active ends on release, so hold the pressed look a bit longer.
+    const holdPressed = (name: string) => {
+        clearTimeout(pressedTimer.current);
+        setPressedLink(name);
+        pressedTimer.current = setTimeout(() => setPressedLink(null), 2000);
+    };
+
+    useEffect(() => () => clearTimeout(pressedTimer.current), []);
 
     const closeMenu = () => setMenuOpen(false);
     const scrollToSection = (id: string) => {
@@ -512,14 +523,19 @@ export default function Home() {
 
             <section
                 data-theme-color="#244936"
-                data-reveal
-                className={`w-full bg-welsh-green text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] ${reveal}`}
+                className="w-full bg-welsh-green text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px]"
                 id="discover"
             >
-                <div className="mx-auto max-w-[1260px] text-[10px] font-bold uppercase tracking-[.17em] text-[#f1be69]">
+                <div
+                    data-reveal
+                    className={`mx-auto max-w-[1260px] text-[10px] font-bold uppercase tracking-[.17em] text-[#f1be69] ${reveal}`}
+                >
                     02 / Meet the makers
                 </div>
-                <div className="mx-auto mt-5 flex max-w-[1260px] items-end justify-between gap-10 max-[800px]:block">
+                <div
+                    data-reveal
+                    className={`mx-auto mt-5 flex max-w-[1260px] items-end justify-between gap-10 max-[800px]:block ${reveal}`}
+                >
                     <h2 className="max-w-[650px] font-display text-[clamp(42px,5vw,68px)] font-normal leading-[.95] tracking-[-.05em] [&_em]:text-[#e45144]">
                         A taste of <em>Wales</em>
                     </h2>
@@ -561,7 +577,11 @@ export default function Home() {
                                     href={producer.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="relative mt-4 inline-flex items-center gap-2 pb-[7px] text-xs font-bold tracking-[.03em] text-welsh-green transition-[scale,color] duration-150 ease-out active:scale-[0.96] active:text-[#d54a3d] active:duration-75 active:before:h-[3px] active:before:scale-x-100 active:before:duration-75 active:[&_span]:translate-x-1 active:[&_span]:-translate-y-1 active:[&_span]:duration-75 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#c8cfc5] before:absolute before:bottom-0 before:left-0 before:z-10 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-[#d54a3d] before:transition-transform before:duration-300 before:ease-out group-hover:before:scale-x-100 [&_span]:inline-block [&_span]:text-[15px] [&_span]:text-[#d54a3d] [&_span]:transition-transform [&_span]:duration-300 [&_span]:ease-out group-hover:[&_span]:translate-x-0.5 group-hover:[&_span]:-translate-y-0.5"
+                                    data-pressed={pressedLink === producer.name || undefined}
+                                    onPointerDown={(event) => {
+                                        if (event.pointerType === "touch") holdPressed(producer.name);
+                                    }}
+                                    className="relative mt-4 inline-flex items-center gap-2 pb-[7px] text-xs font-bold tracking-[.03em] text-welsh-green transition-[scale,color] duration-150 ease-out active:scale-[0.96] active:text-[#d54a3d] active:duration-75 active:before:h-[3px] active:before:scale-x-100 active:before:duration-75 active:[&_span]:translate-x-1 active:[&_span]:-translate-y-1 active:[&_span]:duration-75 data-pressed:scale-[0.96] data-pressed:text-[#d54a3d] data-pressed:duration-75 data-pressed:before:h-[3px] data-pressed:before:scale-x-100 data-pressed:before:duration-75 data-pressed:[&_span]:translate-x-1 data-pressed:[&_span]:-translate-y-1 data-pressed:[&_span]:duration-75 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#c8cfc5] before:absolute before:bottom-0 before:left-0 before:z-10 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-[#d54a3d] before:transition-transform before:duration-300 before:ease-out group-hover:before:scale-x-100 [&_span]:inline-block [&_span]:text-[15px] [&_span]:text-[#d54a3d] [&_span]:transition-transform [&_span]:duration-300 [&_span]:ease-out group-hover:[&_span]:translate-x-0.5 group-hover:[&_span]:-translate-y-0.5"
                                 >
                                     Learn more <Icon name="arrow_outward" />
                                 </a>
@@ -570,7 +590,10 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <p className="mx-auto mt-[27px] max-w-[1260px] text-[10px] text-[#aebeaf]">
+                <p
+                    data-reveal
+                    className={`mx-auto mt-[27px] max-w-[1260px] text-[10px] text-[#aebeaf] ${reveal}`}
+                >
                     These businesses are examples featured in our project
                     research. Eat Welsh, Eat Well does not imply sponsorship or
                     endorsement.

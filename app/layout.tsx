@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Eat Welsh, Eat Well | Choose local. Eat well. Support Wales.",
+    title: "Eat Welsh, Eat Well | Choose local. Support Wales.",
     description:
         "Discover Welsh food producers and make local, informed food choices with Eat Welsh, Eat Well.",
 };
