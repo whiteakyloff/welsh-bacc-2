@@ -56,10 +56,10 @@ const reasons = [
 ];
 
 const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#discover", label: "Discover food" },
-    { href: "#why-welsh", label: "Why Welsh?" },
-    { href: "#get-involved", label: "Get involved" },
+    { target: "about", label: "About" },
+    { target: "discover", label: "Discover food" },
+    { target: "why-welsh", label: "Why Welsh?" },
+    { target: "get-involved", label: "Get involved" },
 ];
 
 const ease = "ease-[cubic-bezier(0.2,0.8,0.2,1)]";
@@ -80,6 +80,9 @@ export default function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const closeMenu = () => setMenuOpen(false);
+    const scrollToSection = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    };
 
     useEffect(() => {
         const elements =
@@ -119,6 +122,17 @@ export default function Home() {
         elements.forEach((element) => observer.observe(element));
 
         return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (window.location.hash) {
+            window.history.replaceState(
+                null,
+                "",
+                `${window.location.pathname}${window.location.search}`,
+            );
+            window.scrollTo(0, 0);
+        }
     }, []);
 
     useEffect(() => {
@@ -169,7 +183,7 @@ export default function Home() {
                     const nextColor = nextSection.dataset.themeColor;
                     const distanceToBoundary =
                         section.getBoundingClientRect().bottom;
-                    const blendDistance = 60;
+                    const blendDistance = 24;
 
                     if (nextColor && distanceToBoundary < blendDistance) {
                         color = blendColors(
@@ -199,10 +213,13 @@ export default function Home() {
     return (
         <main className="overflow-x-clip">
             <header className="absolute z-50 flex h-[86px] w-full items-center justify-between px-[5vw] text-white max-[800px]:px-[6vw]">
-                <a
-                    className="flex items-center gap-2.5 leading-none transition-transform duration-200 hover:-translate-y-0.5"
-                    href="#top"
-                    onClick={closeMenu}
+                <button
+                    className="flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-left leading-none transition-transform duration-200 hover:-translate-y-0.5"
+                    type="button"
+                    onClick={() => {
+                        closeMenu();
+                        scrollToSection("top");
+                    }}
                     aria-label="Eat Welsh, Eat Well home"
                 >
                     <Image
@@ -221,7 +238,7 @@ export default function Home() {
                             Eat Well
                         </small>
                     </span>
-                </a>
+                </button>
                 <button
                     className={`relative hidden size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 p-0
                         transition-[background-color,rotate,border-color] duration-[350ms] ${ease} max-[800px]:flex
@@ -264,16 +281,19 @@ export default function Home() {
                         }`}
                 >
                     {navLinks.map((link) => (
-                        <a
-                            key={link.href}
-                            href={link.href}
-                            onClick={closeMenu}
-                            className="opacity-90 transition-all hover:-translate-y-0.5 hover:opacity-100
+                        <button
+                            key={link.target}
+                            type="button"
+                            onClick={() => {
+                                closeMenu();
+                                scrollToSection(link.target);
+                            }}
+                            className="cursor-pointer border-0 bg-transparent p-0 text-left opacity-90 transition-all hover:-translate-y-0.5 hover:opacity-100
                                 max-[800px]:rounded-xl max-[800px]:p-[13px] max-[800px]:text-[13px]
                                 max-[800px]:hover:translate-x-1 max-[800px]:hover:bg-[#e7f0e8]"
                         >
                             {link.label}
-                        </a>
+                        </button>
                     ))}
                     <a
                         className="rounded-full bg-gold px-[18px] py-3 text-ink transition-all hover:-translate-y-1 hover:bg-[#ffda8a] hover:shadow-lg max-[800px]:mt-2 max-[800px]:rounded-xl max-[800px]:text-center"
@@ -310,18 +330,20 @@ export default function Home() {
                         businesses grow.
                     </p>
                     <div className="mt-[35px] flex items-center gap-[25px] max-[800px]:flex-wrap max-[800px]:gap-[18px_24px] animate-item-in [animation-delay:420ms]">
-                        <a
-                            className="inline-flex items-center gap-5 rounded px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform hover:[&_span]:translate-x-1 bg-gold text-ink"
-                            href="#discover"
+                        <button
+                            className="inline-flex cursor-pointer items-center gap-5 rounded border-0 px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform hover:[&_span]:translate-x-1 bg-gold text-ink"
+                            type="button"
+                            onClick={() => scrollToSection("discover")}
                         >
                             Discover Welsh food <span>↓</span>
-                        </a>
-                        <a
-                            className="text-xs font-bold [&_span]:ml-2 [&_span]:text-[19px] [&_span]:text-[#f1be69] [&_span]:transition-all hover:[&_span]:ml-3.5"
-                            href="#about"
+                        </button>
+                        <button
+                            className="cursor-pointer border-0 bg-transparent p-0 text-xs font-bold [&_span]:ml-2 [&_span]:text-[19px] [&_span]:text-[#f1be69] [&_span]:transition-all hover:[&_span]:ml-3.5"
+                            type="button"
+                            onClick={() => scrollToSection("about")}
                         >
                             Our story <span>→</span>
-                        </a>
+                        </button>
                     </div>
                     <div className="mt-[30px] flex items-center gap-[13px] text-[11px] leading-normal text-[#bfcec2] max-[800px]:my-[35px] max-[800px]:mb-10 animate-item-in [animation-delay:550ms] [&_strong]:text-white">
                         <span className="animate-pulse-mark text-2xl text-[#e45144]">
@@ -396,12 +418,13 @@ export default function Home() {
                             want to make discovering local food feel easy and
                             welcoming.
                         </p>
-                        <a
-                            className="mt-[15px] inline-block text-xs font-bold text-welsh-green [&_span]:ml-2 [&_span]:text-[19px] [&_span]:text-[#f1be69] hover:[&_span]:ml-3.5"
-                            href="#why-welsh"
+                        <button
+                            className="mt-[15px] inline-block cursor-pointer border-0 bg-transparent p-0 text-xs font-bold text-welsh-green [&_span]:ml-2 [&_span]:text-[19px] [&_span]:text-[#f1be69] hover:[&_span]:ml-3.5"
+                            type="button"
+                            onClick={() => scrollToSection("why-welsh")}
                         >
                             Why choose Welsh? <span>→</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div className="mt-[76px] grid grid-cols-3 gap-[4%] border-t border-line pt-[22px] max-[800px]:mt-[50px] max-[800px]:gap-[18px] [&_strong]:my-[13px] [&_strong]:block [&_strong]:font-display [&_strong]:text-2xl [&_strong]:font-normal [&_span]:text-[11px] [&_span]:text-[#d54a3d] [&_p]:max-w-[180px] [&_p]:text-xs [&_p]:leading-normal [&_p]:text-muted">
@@ -661,8 +684,20 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="flex gap-[27px] text-[11px] text-[#d4dfd6] max-[800px]:mt-[25px] max-[800px]:flex-wrap">
-                    <a href="#about">About</a>
-                    <a href="#discover">Discover food</a>
+                    <button
+                        className="cursor-pointer border-0 bg-transparent p-0 text-inherit"
+                        type="button"
+                        onClick={() => scrollToSection("about")}
+                    >
+                        About
+                    </button>
+                    <button
+                        className="cursor-pointer border-0 bg-transparent p-0 text-inherit"
+                        type="button"
+                        onClick={() => scrollToSection("discover")}
+                    >
+                        Discover food
+                    </button>
                     <a href={instagramUrl} target="_blank" rel="noreferrer">
                         Instagram ↗
                     </a>
