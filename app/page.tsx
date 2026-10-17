@@ -523,7 +523,7 @@ export default function Home() {
 
             <section
                 data-theme-color="#244936"
-                className="w-full bg-welsh-green text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px]"
+                className="w-full bg-welsh-green shadow-[0_-2px_0_var(--color-welsh-green)] text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px]"
                 id="discover"
             >
                 <div
