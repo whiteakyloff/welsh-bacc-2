@@ -87,7 +87,7 @@ function HeroArt() {
                 <br />
                 made
             </HeroBadge>
-            <HeroBadge className="left-[calc(50%-245px)] top-[calc(18%+275px)] -rotate-8 hover:-rotate-6 [animation-delay:1.1s,-4s] max-[1100px]:left-[calc(50%-215px)] max-[1100px]:top-[calc(18%+235px)] max-[1023px]:left-[calc(50%-172px)] max-[1023px]:top-auto max-[1023px]:bottom-[12%]">
+            <HeroBadge className="left-[calc(50%-245px)] top-[calc(18%+275px)] -rotate-8 hover:-rotate-6 [animation-delay:calc(var(--badge-delay)_+_var(--badge-stagger)),-4s] max-[1100px]:left-[calc(50%-215px)] max-[1100px]:top-[calc(18%+235px)] max-[1023px]:left-[calc(50%-172px)] max-[1023px]:top-auto max-[1023px]:bottom-[12%]">
                 Simply
                 <br />
                 Welsh

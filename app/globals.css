@@ -20,9 +20,9 @@
     --animate-sun-breathe: sun-breathe 10s ease-in-out infinite;
     --animate-dragon-float: dragon-float 7s ease-in-out infinite;
     --animate-pulse-mark: pulse-mark 2.5s ease-in-out infinite;
-    /* Pop in after the art, then drift gently; delays set per badge. */
+    /* Pop in after the art, then drift gently. Timing comes from revealSettings in lib/reveal.ts. */
     --animate-badge:
-        badge-in 0.7s both 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+        badge-in 0.7s both var(--badge-delay) cubic-bezier(0.34, 1.4, 0.64, 1),
         badge-float 8s ease-in-out infinite;
 
     @keyframes rise-in {

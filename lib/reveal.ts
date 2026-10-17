@@ -9,6 +9,8 @@ export const revealSettings = {
     distance: 16, // px the element slides up from
     stagger: 50, // ms between items in a list (cards, reasons)
     easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+    badgeDelay: 350, // ms after the hero art starts before the first label pops in
+    badgeStagger: 200, // ms between the first and second label
 };
 
 /** CSS variables consumed by the reveal classes; set once on the page root. */
@@ -17,6 +19,8 @@ export const revealVars = {
     "--reveal-distance": `${revealSettings.distance}px`,
     "--reveal-ease": revealSettings.easing,
     "--reveal-delay": "0ms",
+    "--badge-delay": `${revealSettings.badgeDelay}ms`,
+    "--badge-stagger": `${revealSettings.badgeStagger}ms`,
 } as CSSProperties;
 
 /** Staggered delay for the nth item in a list. */
