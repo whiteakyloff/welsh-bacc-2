@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import logo from "../images/logo.png";
 import dragonLogo from "../images/logo_dragon.png";
+import instagramIcon from "../images/instagram_icon.png";
 
 const instagramUrl = "https://www.instagram.com/eatwelsheatwell/";
 
@@ -15,6 +16,7 @@ const producers = [
         description:
             "A local bakery example from the campaign research — a reminder to look for Welsh food on your doorstep.",
         accent: "bakery",
+        icon: "bakery_dining",
         link: "https://www.instagram.com/davies_of_mumbles_/",
     },
     {
@@ -24,6 +26,7 @@ const producers = [
         description:
             "A much-loved Welsh food name included in the project as an example of a local producer to discover.",
         accent: "icecream",
+        icon: "icecream",
         link: "https://www.joes-icecream.com/",
     },
     {
@@ -33,6 +36,7 @@ const producers = [
         description:
             "Explore Welsh dairy products and make a considered choice that supports local food production.",
         accent: "dairy",
+        icon: "glass_cup",
         link: "https://villagedairy.co.uk/",
     },
 ];
@@ -62,12 +66,50 @@ const navLinks = [
     { target: "get-involved", label: "Get involved" },
 ];
 
+function Icon({ name, className = "" }: { name: string; className?: string }) {
+    return (
+        <span className={`material-symbols-outlined ${className}`} aria-hidden="true">
+            {name}
+        </span>
+    );
+}
+
 const ease = "ease-[cubic-bezier(0.2,0.8,0.2,1)]";
 
+// Scroll reveal settings — tweak these to change how sections appear.
+const revealSettings = {
+    // Positive bottom margin starts the reveal before the element enters the screen.
+    rootMargin: "0px 0px 5% 0px",
+    threshold: 0,
+    duration: 500, // ms
+    distance: 16, // px the element slides up from
+    stagger: 50, // ms between items in a list (cards, reasons)
+    easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+};
+
+const revealVars = {
+    "--reveal-duration": `${revealSettings.duration}ms`,
+    "--reveal-distance": `${revealSettings.distance}px`,
+    "--reveal-ease": revealSettings.easing,
+    "--reveal-delay": "0ms",
+} as CSSProperties;
+
+const revealDelay = (index: number) =>
+    ({
+        "--reveal-delay": `${(index + 1) * revealSettings.stagger}ms`,
+    }) as CSSProperties;
+
+const revealBase =
+    "opacity-0 translate-y-(--reveal-distance) data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 " +
+    "duration-(--reveal-duration) ease-(--reveal-ease) delay-(--reveal-delay) " +
+    "motion-reduce:opacity-100 motion-reduce:translate-y-0";
+
+const reveal = `${revealBase} transition-[opacity,translate]`;
+
 const bars = [
-    { open: "rotate-45", closed: "-translate-y-2.5" },
+    { open: "rotate-45", closed: "-translate-y-1.5" },
     { open: "scale-x-50 opacity-0", closed: "" },
-    { open: "-rotate-45", closed: "translate-y-2.5" },
+    { open: "-rotate-45", closed: "translate-y-1.5" },
 ];
 
 const labelBase =
@@ -114,8 +156,8 @@ export default function Home() {
             },
             {
                 root: null,
-                rootMargin: "0px 0px -40px 0px",
-                threshold: 0,
+                rootMargin: revealSettings.rootMargin,
+                threshold: revealSettings.threshold,
             },
         );
 
@@ -211,7 +253,7 @@ export default function Home() {
     }, []);
 
     return (
-        <main className="overflow-x-clip">
+        <main className="overflow-x-clip" style={revealVars}>
             <header className="absolute z-50 flex h-[86px] w-full items-center justify-between px-[5vw] text-white max-[800px]:px-[6vw]">
                 <button
                     className="flex cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-left leading-none transition-transform duration-200 hover:-translate-y-0.5"
@@ -296,13 +338,35 @@ export default function Home() {
                         </button>
                     ))}
                     <a
-                        className="rounded-full bg-gold px-[18px] py-3 text-ink transition-all hover:-translate-y-1 hover:bg-[#ffda8a] hover:shadow-lg max-[800px]:mt-2 max-[800px]:rounded-xl max-[800px]:text-center"
+                        className="group flex size-10 items-center justify-center rounded-full border border-gold/50 transition-all duration-200
+                            min-[801px]:hover:border-gold min-[801px]:hover:bg-gold
+                            max-[800px]:mt-1.5 max-[800px]:size-auto max-[800px]:justify-start max-[800px]:gap-3 max-[800px]:rounded-xl
+                            max-[800px]:border-welsh-green/10 max-[800px]:bg-welsh-green/[.04] max-[800px]:p-2.5 max-[800px]:hover:bg-[#e7f0e8]"
                         href={instagramUrl}
                         target="_blank"
                         rel="noreferrer"
+                        aria-label="Follow us on Instagram"
                         onClick={closeMenu}
                     >
-                        Follow us <span aria-hidden="true">↗</span>
+                        <span className="flex items-center justify-center max-[800px]:size-9 max-[800px]:rounded-[10px] max-[800px]:bg-gold">
+                            <Image
+                                src={instagramIcon}
+                                alt=""
+                                className="size-[18px] invert transition-[filter] duration-200 min-[801px]:group-hover:invert-0 max-[800px]:invert-0"
+                                width={18}
+                                height={18}
+                            />
+                        </span>
+                        <span className="hidden flex-col leading-tight max-[800px]:flex">
+                            <span className="text-[13px]">Follow us on Instagram</span>
+                            <span className="mt-0.5 text-[11px] font-normal text-muted">
+                                @eatwelsheatwell
+                            </span>
+                        </span>
+                        <Icon
+                            name="arrow_outward"
+                            className="ml-auto mr-1.5 hidden text-lg text-[#d54a3d] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 max-[800px]:inline-block"
+                        />
                     </a>
                 </nav>
             </header>
@@ -331,24 +395,22 @@ export default function Home() {
                     </p>
                     <div className="mt-[35px] flex items-center gap-[25px] max-[800px]:flex-wrap max-[800px]:gap-[18px_24px] animate-item-in [animation-delay:420ms]">
                         <button
-                            className="inline-flex cursor-pointer items-center gap-5 rounded border-0 px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform hover:[&_span]:translate-x-1 bg-gold text-ink"
+                            className="inline-flex cursor-pointer items-center gap-5 rounded border-0 px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform hover:[&_span]:translate-y-1 bg-gold text-ink"
                             type="button"
                             onClick={() => scrollToSection("discover")}
                         >
-                            Discover Welsh food <span>↓</span>
+                            Discover Welsh food <Icon name="arrow_downward" />
                         </button>
                         <button
                             className="cursor-pointer border-0 bg-transparent p-0 text-xs font-bold [&_span]:ml-2 [&_span]:text-[19px] [&_span]:text-[#f1be69] [&_span]:transition-all hover:[&_span]:ml-3.5"
                             type="button"
                             onClick={() => scrollToSection("about")}
                         >
-                            Our story <span>→</span>
+                            Our story <Icon name="arrow_forward" />
                         </button>
                     </div>
                     <div className="mt-[30px] flex items-center gap-[13px] text-[11px] leading-normal text-[#bfcec2] max-[800px]:my-[35px] max-[800px]:mb-10 animate-item-in [animation-delay:550ms] [&_strong]:text-white">
-                        <span className="animate-pulse-mark text-2xl text-[#e45144]">
-                            ✳
-                        </span>
+                        <Icon name="asterisk" className="animate-pulse-mark text-2xl text-[#e45144]" />
                         <p>
                             <strong>Small choices add up.</strong>
                             <br />
@@ -371,17 +433,17 @@ export default function Home() {
                         height={500}
                     />
                     <div
-                        className={`${labelBase} right-[8%] top-[20%] rotate-6 hover:rotate-4 max-[800px]:right-[20%] max-[800px]:top-[17%]`}
+                        className={`${labelBase} right-[8%] top-[20%] rotate-6 hover:rotate-4 max-[800px]:top-[17%]`}
                     >
-                        <span className="mr-[7px] text-[#d54a3d]">✦</span>{" "}
+                        <Icon name="star_shine" className="mr-[7px] text-[#d54a3d]" />{" "}
                         Locally
                         <br />
                         made
                     </div>
                     <div
-                        className={`${labelBase} bottom-[32%] left-[8%] -rotate-8 hover:-rotate-6 max-[800px]:bottom-[12%] max-[800px]:left-[20%]`}
+                        className={`${labelBase} bottom-[32%] left-[8%] -rotate-8 hover:-rotate-6 max-[800px]:bottom-[12%]`}
                     >
-                        <span className="mr-[7px] text-[#d54a3d]">✦</span>{" "}
+                        <Icon name="star_shine" className="mr-[7px] text-[#d54a3d]" />{" "}
                         Simply
                         <br />
                         Welsh
@@ -392,7 +454,7 @@ export default function Home() {
             <section
                 data-theme-color="#fffcf6"
                 data-reveal
-                className="mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
+                className={`mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] ${reveal}`}
                 id="about"
             >
                 <div className="text-[10px] font-bold uppercase tracking-[.17em] text-[#f1be69]">
@@ -419,11 +481,11 @@ export default function Home() {
                             welcoming.
                         </p>
                         <button
-                            className="mt-[15px] inline-block cursor-pointer border-0 bg-transparent p-0 text-xs font-bold text-welsh-green [&_span]:ml-2 [&_span]:text-[19px] [&_span]:text-[#f1be69] hover:[&_span]:ml-3.5"
+                            className="mt-[15px] inline-block cursor-pointer border-0 bg-transparent p-0 text-xs font-bold text-welsh-green [&_span]:ml-2 [&_span]:text-[19px] [&_span]:inline-block [&_span]:text-[#f1be69] [&_span]:transition-transform [&_span]:duration-200 [&_span]:ease-out hover:[&_span]:translate-x-1.5"
                             type="button"
                             onClick={() => scrollToSection("why-welsh")}
                         >
-                            Why choose Welsh? <span>→</span>
+                            Why choose Welsh? <Icon name="arrow_forward" />
                         </button>
                     </div>
                 </div>
@@ -451,18 +513,16 @@ export default function Home() {
             <section
                 data-theme-color="#244936"
                 data-reveal
-                className="w-full bg-welsh-green text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
+                className={`w-full bg-welsh-green text-white px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] ${reveal}`}
                 id="discover"
             >
-                <div className="mx-auto flex max-w-[1260px] items-end justify-between gap-10 max-[800px]:block">
-                    <div>
-                        <div className="text-[10px] font-bold uppercase tracking-[.17em] text-[#f1be69]">
-                            02 / Meet the makers
-                        </div>
-                        <h2 className="mt-5 max-w-[650px] font-display text-[clamp(42px,5vw,68px)] font-normal leading-[.95] tracking-[-.05em] [&_em]:text-[#e45144]">
-                            A taste of <em>Wales</em>
-                        </h2>
-                    </div>
+                <div className="mx-auto max-w-[1260px] text-[10px] font-bold uppercase tracking-[.17em] text-[#f1be69]">
+                    02 / Meet the makers
+                </div>
+                <div className="mx-auto mt-5 flex max-w-[1260px] items-end justify-between gap-10 max-[800px]:block">
+                    <h2 className="max-w-[650px] font-display text-[clamp(42px,5vw,68px)] font-normal leading-[.95] tracking-[-.05em] [&_em]:text-[#e45144]">
+                        A taste of <em>Wales</em>
+                    </h2>
                     <p className="w-[300px] shrink-0 text-[13px] leading-[1.6] text-[#c7d2c7] max-[800px]:mt-[25px] max-[800px]:w-auto">
                         Three Welsh food names from our project research. Start
                         exploring, then look out for more local producers in
@@ -471,24 +531,20 @@ export default function Home() {
                 </div>
                 <div className="mx-auto mt-[55px] grid max-w-[1260px] grid-cols-3 gap-[19px] max-[1100px]:gap-[14px] max-[800px]:mt-[35px] max-[800px]:grid-cols-1 max-[800px]:gap-5">
                     {producers.map((producer, index) => (
-                        <article
+                        <div
                             data-reveal
-                            className={`group overflow-hidden rounded-[3px] bg-paper text-ink opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform,box-shadow] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] hover:-translate-y-2 hover:shadow-[0_18px_30px_rgba(15,43,31,.2)] motion-reduce:opacity-100 motion-reduce:translate-y-0 ${index === 0 ? "delay-[80ms]" : index === 1 ? "delay-[160ms]" : "delay-[240ms]"}`}
+                            className={reveal}
+                            style={revealDelay(index)}
                             key={producer.name}
                         >
+                        <article className="group h-full overflow-hidden rounded-[3px] bg-paper text-ink transition-[translate,box-shadow] duration-[350ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_18px_30px_rgba(15,43,31,.2)]">
                             <div
                                 className={`relative flex h-[180px] items-center justify-center max-[800px]:h-[145px] ${producer.accent === "bakery" ? "bg-[#e8a35f]" : producer.accent === "icecream" ? "bg-[#e48b81]" : "bg-[#e4d38c]"}`}
                             >
-                                <span
-                                    className="text-[115px] leading-none text-white/80 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-[5deg]"
-                                    aria-hidden="true"
-                                >
-                                    {producer.accent === "bakery"
-                                        ? "✣"
-                                        : producer.accent === "icecream"
-                                          ? "◒"
-                                          : "◌"}
-                                </span>
+                                <Icon
+                                    name={producer.icon}
+                                    className="text-[115px] leading-none text-white/80 transition-transform duration-[450ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.08] group-hover:-rotate-[5deg]"
+                                    />
                                 <span className="absolute bottom-[14px] left-[17px] bg-white/85 px-[9px] py-[6px] text-[9px] font-bold uppercase tracking-[.1em] text-ink">
                                     {producer.category}
                                 </span>
@@ -503,12 +559,15 @@ export default function Home() {
                                 <p>{producer.description}</p>
                                 <a
                                     href={producer.link}
-                                    className="mt-3 inline-block border-b border-[#c8cfc5] pb-[6px] text-[11px] font-bold [&_span]:ml-3 [&_span]:text-[#d54a3d]"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="relative mt-4 inline-flex items-center gap-2 pb-[7px] text-xs font-bold tracking-[.03em] text-welsh-green transition-[scale,color] duration-150 ease-out active:scale-[0.96] active:text-[#d54a3d] active:duration-75 active:before:h-[3px] active:before:scale-x-100 active:before:duration-75 active:[&_span]:translate-x-1 active:[&_span]:-translate-y-1 active:[&_span]:duration-75 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[#c8cfc5] before:absolute before:bottom-0 before:left-0 before:z-10 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-[#d54a3d] before:transition-transform before:duration-300 before:ease-out group-hover:before:scale-x-100 [&_span]:inline-block [&_span]:text-[15px] [&_span]:text-[#d54a3d] [&_span]:transition-transform [&_span]:duration-300 [&_span]:ease-out group-hover:[&_span]:translate-x-0.5 group-hover:[&_span]:-translate-y-0.5"
                                 >
-                                    Learn more <span>↗</span>
+                                    Learn more <Icon name="arrow_outward" />
                                 </a>
                             </div>
                         </article>
+                        </div>
                     ))}
                 </div>
                 <p className="mx-auto mt-[27px] max-w-[1260px] text-[10px] text-[#aebeaf]">
@@ -521,7 +580,7 @@ export default function Home() {
             <section
                 data-theme-color="#fffcf6"
                 data-reveal
-                className="mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
+                className={`mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] ${reveal}`}
                 id="why-welsh"
             >
                 <div className="text-[10px] font-bold uppercase tracking-[.17em] text-[#f1be69]">
@@ -543,7 +602,8 @@ export default function Home() {
                     {reasons.map((reason, index) => (
                         <div
                             data-reveal
-                            className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform,background-color,padding] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] hover:bg-welsh-green/5 hover:pl-[14px] motion-reduce:opacity-100 motion-reduce:translate-y-0 ${index === 0 ? "delay-[80ms]" : index === 1 ? "delay-[160ms]" : "delay-[240ms]"}`}
+                            className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-welsh-green/5 hover:pl-[14px]`}
+                            style={revealDelay(index)}
                             key={reason.number}
                         >
                             <span className="text-xs text-[#d54a3d]">
@@ -555,9 +615,6 @@ export default function Home() {
                             <p className="max-w-[370px] text-[13px] leading-normal text-muted max-[800px]:col-[2/4]">
                                 {reason.text}
                             </p>
-                            <span className="mr-3 text-right text-xl text-[#d54a3d] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                                ↗
-                            </span>
                         </div>
                     ))}
                 </div>
@@ -566,7 +623,7 @@ export default function Home() {
             <section
                 data-theme-color="#d95348"
                 data-reveal
-                className="bg-[#d95348] text-white opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
+                className={`bg-[#d95348] text-white ${reveal}`}
             >
                 <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-[14%] px-[9vw] py-[88px] max-[1100px]:gap-[8%] max-[1100px]:px-[7vw] max-[800px]:grid-cols-1 max-[800px]:gap-[45px] max-[800px]:py-[70px]">
                     <div>
@@ -586,7 +643,7 @@ export default function Home() {
                     </div>
                     <div className="border-t border-white/35">
                         <div className="grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px]">
-                            <span className="text-xl text-[#f5c978]">✦</span>
+                            <Icon name="star_shine" className="text-xl text-[#f5c978]" />
                             <strong className="font-display text-xl font-normal">
                                 Shop with curiosity
                             </strong>
@@ -596,7 +653,7 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px]">
-                            <span className="text-xl text-[#f5c978]">✦</span>
+                            <Icon name="star_shine" className="text-xl text-[#f5c978]" />
                             <strong className="font-display text-xl font-normal">
                                 Keep it balanced
                             </strong>
@@ -606,7 +663,7 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px]">
-                            <span className="text-xl text-[#f5c978]">✦</span>
+                            <Icon name="star_shine" className="text-xl text-[#f5c978]" />
                             <strong className="font-display text-xl font-normal">
                                 Make it affordable
                             </strong>
@@ -622,7 +679,7 @@ export default function Home() {
             <section
                 data-theme-color="#fffcf6"
                 data-reveal
-                className="grid grid-cols-2 items-center gap-[14%] max-[800px]:grid-cols-1 max-[800px]:gap-[35px] mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] opacity-0 translate-y-6 data-[revealed=true]:opacity-100 data-[revealed=true]:translate-y-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] motion-reduce:opacity-100 motion-reduce:translate-y-0"
+                className={`grid grid-cols-2 items-center gap-[14%] max-[800px]:grid-cols-1 max-[800px]:gap-[35px] mx-auto max-w-[1440px] px-[9vw] py-[100px] max-[1100px]:px-[7vw] max-[800px]:py-[70px] ${reveal}`}
                 id="get-involved"
             >
                 <div>
@@ -640,16 +697,16 @@ export default function Home() {
                         everyday life.
                     </p>
                     <a
-                        className="mt-[18px] inline-flex items-center gap-5 rounded px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-[transform,background-color,box-shadow] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform [&_span]:duration-200 hover:[&_span]:translate-x-1 bg-gold text-ink"
+                        className="mt-[18px] inline-flex items-center gap-5 rounded px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-[translate,background-color,box-shadow] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform [&_span]:duration-200 hover:[&_span]:translate-x-1 bg-gold text-ink"
                         href={instagramUrl}
                         target="_blank"
                         rel="noreferrer"
                     >
-                        Follow @eatwelsheatwell <span>↗</span>
+                        Follow Us! <Icon name="arrow_outward" />
                     </a>
                 </div>
                 <div className="relative bg-cream p-[45px] before:absolute before:inset-y-0 before:left-0 before:w-[6px] before:bg-[#f1be69] max-[800px]:p-[30px] [&_p]:text-[13px] [&_p]:leading-[1.7] [&_p]:text-muted [&_h3]:my-[14px] [&_h3]:font-display [&_h3]:text-[30px]">
-                    <span className="text-[28px] text-[#d54a3d]">✳</span>
+                    <Icon name="asterisk" className="animate-pulse-mark text-[28px] text-[#d54a3d]" />
                     <p className="mt-[27px] text-[10px] font-bold uppercase tracking-[.17em] text-[#9a6f4b]">
                         A future idea
                     </p>
@@ -682,25 +739,6 @@ export default function Home() {
                             Choose local. Eat well. Support Wales.
                         </span>
                     </div>
-                </div>
-                <div className="flex gap-[27px] text-[11px] text-[#d4dfd6] max-[800px]:mt-[25px] max-[800px]:flex-wrap">
-                    <button
-                        className="cursor-pointer border-0 bg-transparent p-0 text-inherit"
-                        type="button"
-                        onClick={() => scrollToSection("about")}
-                    >
-                        About
-                    </button>
-                    <button
-                        className="cursor-pointer border-0 bg-transparent p-0 text-inherit"
-                        type="button"
-                        onClick={() => scrollToSection("discover")}
-                    >
-                        Discover food
-                    </button>
-                    <a href={instagramUrl} target="_blank" rel="noreferrer">
-                        Instagram ↗
-                    </a>
                 </div>
                 <p className="text-[10px] text-[#9caf9f] max-[800px]:mt-[25px]">
                     © 2026 Eat Welsh, Eat Well
