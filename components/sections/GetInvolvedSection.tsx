@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon } from "@/components/ui/Icon";
+import { PressableDiv } from "@/components/ui/PressableDiv";
 import { INSTAGRAM_URL } from "@/lib/content";
 import { reveal } from "@/lib/reveal";
 import { sectionColors } from "@/lib/theme";
@@ -41,10 +42,14 @@ export function GetInvolvedSection() {
 
 function FestivalCard() {
     return (
-        <div className="relative bg-cream p-[45px] before:absolute before:inset-y-0 before:left-0 before:w-[6px] before:bg-[#f1be69] max-[800px]:p-[30px]">
+        // Pressing the card sends the asterisk into a fast spin.
+        <PressableDiv
+            anyPointer
+            className="group relative bg-cream p-[45px] before:absolute before:inset-y-0 before:left-0 before:w-[6px] before:bg-[#f1be69] max-[800px]:p-[30px]"
+        >
             <Icon
                 name="asterisk"
-                className="animate-pulse-mark text-[28px] text-[#d54a3d]"
+                className="inline-block animate-pulse-mark text-[28px] text-[#d54a3d] group-data-pressed:animate-spin-burst"
             />
             <p className="mt-[27px] text-[13px] font-bold uppercase leading-[1.7] tracking-[.17em] text-muted">
                 A future idea
@@ -58,6 +63,6 @@ function FestivalCard() {
                 dependent on funding, volunteers and support.
             </p>
             <span className="mt-7 block h-[2px] w-[45px] bg-[#d54a3d]" />
-        </div>
+        </PressableDiv>
     );
 }

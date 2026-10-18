@@ -8,9 +8,12 @@ import type { Producer } from "@/lib/content";
 import { underlineLink } from "@/lib/linkStyles";
 
 export function ProducerCard({ producer }: { producer: Producer }) {
-    const pressProps = useHeldPress();
     const touched = useRef(false);
     const redirect = useRef<ReturnType<typeof setTimeout>>(undefined);
+    // Pressing another card (or anything else pressable) cancels the redirect.
+    const pressProps = useHeldPress({
+        onInterrupt: () => clearTimeout(redirect.current),
+    });
 
     useEffect(() => () => clearTimeout(redirect.current), []);
 
@@ -84,7 +87,10 @@ export function ProducerCard({ producer }: { producer: Producer }) {
                         Learn more <Icon name="arrow_outward" />
                     </span>
                     {/* Stretches the link over the whole card (the <a> itself isn't positioned) */}
-                    <span aria-hidden="true" className="absolute inset-0 z-20" />
+                    <span
+                        aria-hidden="true"
+                        className="absolute inset-0 z-20"
+                    />
                 </a>
             </div>
         </article>

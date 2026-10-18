@@ -22,6 +22,13 @@
     --animate-sun-breathe: sun-breathe 10s ease-in-out infinite;
     --animate-dragon-float: dragon-float 7s ease-in-out infinite;
     --animate-pulse-mark: pulse-mark 2.5s ease-in-out infinite;
+    /* Sparkle: pops, flickers and settles. Plays once per hover/press. */
+    --animate-twinkle: twinkle 0.9s ease-in-out both;
+    /* Fast spin that grows, then shrinks back as it winds down; lasts as long
+       as the held press (HOLD_MS in useHeldPress). */
+    --animate-spin-burst:
+        spin-burst 2s cubic-bezier(0.2, 0.6, 0.35, 1) both,
+        spin-pop 2s ease-in-out both;
     /* Pop in after the art, then drift gently. Timing comes from revealSettings in lib/reveal.ts. */
     --animate-badge:
         badge-in 0.7s both var(--badge-delay) cubic-bezier(0.34, 1.4, 0.64, 1),
@@ -76,6 +83,31 @@
     @keyframes badge-float {
         50% {
             transform: translateY(-5px);
+        }
+    }
+    @keyframes twinkle {
+        25% {
+            transform: scale(1.35);
+        }
+        50% {
+            transform: scale(0.85);
+            opacity: 0.5;
+        }
+        75% {
+            transform: scale(1.12);
+            opacity: 1;
+        }
+    }
+    /* rotate and scale are separate properties, so the two animations combine. */
+    @keyframes spin-burst {
+        to {
+            rotate: 1800deg;
+        }
+    }
+    @keyframes spin-pop {
+        15%,
+        65% {
+            scale: 1.5;
         }
     }
     @keyframes pulse-mark {

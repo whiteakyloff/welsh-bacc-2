@@ -34,7 +34,7 @@ export function EatWellSection() {
                         >
                             <Icon
                                 name="star_shine"
-                                className="inline-block text-xl text-[#f5c978] transition-transform duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] group-hover:rotate-[72deg] group-hover:scale-110 group-data-pressed:rotate-[72deg] group-data-pressed:scale-125"
+                                className="inline-block self-start text-xl leading-7 text-[#f5c978] group-hover:animate-twinkle group-data-pressed:animate-twinkle"
                             />
                             <strong className="font-display text-xl font-normal">
                                 {tip.title}
