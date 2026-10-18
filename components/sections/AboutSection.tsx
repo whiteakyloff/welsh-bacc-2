@@ -2,6 +2,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon } from "@/components/ui/Icon";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 import { aboutSteps } from "@/lib/content";
+import { underlineLink } from "@/lib/linkStyles";
 import { reveal } from "@/lib/reveal";
 import { sectionColors } from "@/lib/theme";
 
@@ -35,9 +36,13 @@ export function AboutSection() {
                     </p>
                     <ScrollButton
                         target="why-welsh"
-                        className="mt-[15px] inline-block cursor-pointer border-0 bg-transparent p-0 text-xs font-bold text-welsh-green [&_span]:ml-2 [&_span]:text-[19px] [&_span]:inline-block [&_span]:text-[#f1be69] [&_span]:transition-transform [&_span]:duration-200 [&_span]:ease-out hover:[&_span]:translate-x-1.5"
+                        className="group mt-[15px] block cursor-pointer border-0 bg-transparent p-0"
                     >
-                        Why choose Welsh? <Icon name="arrow_forward" />
+                        <span
+                            className={`${underlineLink} group-hover:[&_span]:translate-x-1 group-active:[&_span]:translate-x-1.5 group-data-pressed:[&_span]:translate-x-1.5`}
+                        >
+                            Why choose Welsh? <Icon name="arrow_forward" />
+                        </span>
                     </ScrollButton>
                 </div>
             </div>

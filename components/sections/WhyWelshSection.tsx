@@ -1,4 +1,5 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { PressableDiv } from "@/components/ui/PressableDiv";
 import { reasons } from "@/lib/content";
 import { reveal, revealBase, revealDelay } from "@/lib/reveal";
 import { sectionColors } from "@/lib/theme";
@@ -26,13 +27,13 @@ export function WhyWelshSection() {
             </div>
             <div className="mt-[70px] border-t border-line max-[800px]:mt-10">
                 {reasons.map((reason, index) => (
-                    <div
+                    <PressableDiv
                         data-reveal
-                        className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-welsh-green/5 hover:pl-[14px]`}
+                        className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-welsh-green/5 hover:pl-[14px] data-pressed:bg-welsh-green/5 data-pressed:pl-[14px] data-pressed:delay-0 data-pressed:duration-200`}
                         style={revealDelay(index)}
                         key={reason.title}
                     >
-                        <span className="text-xs text-[#d54a3d]">
+                        <span className="origin-left text-xs text-[#d54a3d] transition-transform duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)] group-hover:scale-125 group-data-pressed:scale-125">
                             {String(index + 1).padStart(2, "0")}
                         </span>
                         <h3 className="font-display text-[24px] font-normal">
@@ -41,7 +42,7 @@ export function WhyWelshSection() {
                         <p className="max-w-[370px] text-[13px] leading-normal text-muted max-[800px]:col-[2/4]">
                             {reason.text}
                         </p>
-                    </div>
+                    </PressableDiv>
                 ))}
             </div>
         </section>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const HOLD_MS = 2000;
+export const HOLD_MS = 2000;
 
 /**
  * On touch devices `:active` ends on release, so this keeps a "pressed" flag
@@ -20,6 +20,12 @@ export function useHeldPress() {
             clearTimeout(timer.current);
             setPressed(true);
             timer.current = setTimeout(() => setPressed(false), HOLD_MS);
+        },
+        // The browser cancels the pointer when the touch turns into a scroll,
+        // so swiping past an element doesn't leave it looking pressed.
+        onPointerCancel: () => {
+            clearTimeout(timer.current);
+            setPressed(false);
         },
     };
 

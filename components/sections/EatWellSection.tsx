@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon } from "@/components/ui/Icon";
+import { PressableDiv } from "@/components/ui/PressableDiv";
 import { eatWellTips } from "@/lib/content";
 import { reveal } from "@/lib/reveal";
 import { sectionColors } from "@/lib/theme";
@@ -27,13 +28,13 @@ export function EatWellSection() {
                 </div>
                 <div className="border-t border-white/35">
                     {eatWellTips.map((tip) => (
-                        <div
+                        <PressableDiv
                             key={tip.title}
-                            className="grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px]"
+                            className="group grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px] transition-[background-color,padding] duration-300 ease-out hover:bg-white/[.06] hover:pl-3 data-pressed:bg-white/10 data-pressed:pl-3 data-pressed:duration-200"
                         >
                             <Icon
                                 name="star_shine"
-                                className="text-xl text-[#f5c978]"
+                                className="inline-block text-xl text-[#f5c978] transition-transform duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] group-hover:rotate-[72deg] group-hover:scale-110 group-data-pressed:rotate-[72deg] group-data-pressed:scale-125"
                             />
                             <strong className="font-display text-xl font-normal">
                                 {tip.title}
@@ -41,7 +42,7 @@ export function EatWellSection() {
                             <p className="col-start-2 mt-1.5 text-xs leading-[1.5] text-[#f8d4cc]">
                                 {tip.text}
                             </p>
-                        </div>
+                        </PressableDiv>
                     ))}
                 </div>
             </div>
