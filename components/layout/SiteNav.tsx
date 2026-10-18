@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import instagramIcon from "@/images/instagram_icon.png";
+import instagramIcon from "@/images/instagram_icon.svg";
 import { Icon } from "@/components/ui/Icon";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 import { INSTAGRAM_HANDLE, INSTAGRAM_URL, navLinks } from "@/lib/content";
