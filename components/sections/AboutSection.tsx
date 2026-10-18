@@ -42,10 +42,10 @@ export function AboutSection() {
                 </div>
             </div>
             <div className="mt-[76px] grid grid-cols-3 gap-[4%] border-t border-line pt-[22px] max-[800px]:mt-[50px] max-[800px]:gap-[18px]">
-                {aboutSteps.map((step) => (
-                    <div key={step.number}>
+                {aboutSteps.map((step, index) => (
+                    <div key={step.title}>
                         <span className="text-[11px] text-[#d54a3d]">
-                            {step.number}
+                            {String(index + 1).padStart(2, "0")}
                         </span>
                         <strong className="my-[13px] block font-display text-2xl font-normal">
                             {step.title}

@@ -30,10 +30,10 @@ export function WhyWelshSection() {
                         data-reveal
                         className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-welsh-green/5 hover:pl-[14px]`}
                         style={revealDelay(index)}
-                        key={reason.number}
+                        key={reason.title}
                     >
                         <span className="text-xs text-[#d54a3d]">
-                            {reason.number}
+                            {String(index + 1).padStart(2, "0")}
                         </span>
                         <h3 className="font-display text-[24px] font-normal">
                             {reason.title}

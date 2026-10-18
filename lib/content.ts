@@ -20,17 +20,14 @@ export const navLinks: { target: SectionId; label: string }[] = [
 
 export const aboutSteps = [
     {
-        number: "01",
         title: "Discover",
         text: "Find the Welsh producers and products near you.",
     },
     {
-        number: "02",
         title: "Choose",
         text: "Make food choices that work for you and your budget.",
     },
     {
-        number: "03",
         title: "Support",
         text: "Help local businesses and communities thrive.",
     },
@@ -83,17 +80,14 @@ export const producers: Producer[] = [
 
 export const reasons = [
     {
-        number: "01",
         title: "Keep local businesses visible",
         text: "Choosing Welsh products helps more people discover the farmers, producers and independent businesses around them.",
     },
     {
-        number: "02",
         title: "Make a considered choice",
         text: "Look at labels, compare options and choose food that fits your needs, budget and what is available locally.",
     },
     {
-        number: "03",
         title: "Discover more of Wales",
         text: "From bakeries to dairies, local food is a simple way to explore the people and places that make Wales special.",
     },
