@@ -92,7 +92,10 @@
     }
     body {
         margin: 0;
-        background: #fffcf6;
+        /* Never seen on the page (<main> paints cream over it). Safari 26 tints its
+           toolbars from this, so useThemeColorSync keeps it matching the section on
+           screen; it starts as the hero's green. */
+        background: #173b2d;
         color: #18251f;
         font-family: Arial, Helvetica, sans-serif;
     }

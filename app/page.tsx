@@ -1,5 +1,4 @@
 import { PageEffects } from "@/components/PageEffects";
-import { ThemeColorEdges } from "@/components/ThemeColorEdges";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { AboutSection } from "@/components/sections/AboutSection";
@@ -12,9 +11,8 @@ import { revealVars } from "@/lib/reveal";
 
 export default function Home() {
     return (
-        <main className="overflow-x-clip" style={revealVars}>
+        <main className="overflow-x-clip bg-paper" style={revealVars}>
             <PageEffects />
-            <ThemeColorEdges />
             <SiteHeader />
             <HeroSection />
             <AboutSection />

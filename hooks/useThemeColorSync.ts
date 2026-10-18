@@ -40,22 +40,16 @@ function colorAt(sections: HTMLElement[], y: number) {
 }
 
 /**
- * Keeps the browser UI matching the `data-theme-color` of the section under it,
- * blending smoothly between sections:
+ * Keeps the browser UI matching the `data-theme-color` of the section at the top
+ * of the viewport, blending smoothly between sections:
  * - `<meta name="theme-color">` for Chrome/Android and Safari up to 18.
- * - The `[data-theme-edge]` strips (see ThemeColorEdges) for Safari 26+, which
- *   ignores theme-color and tints its bars from fixed elements at the screen edges.
+ * - The body background for Safari 26+, which ignores theme-color and tints its
+ *   toolbars from the body instead (the page itself covers the body).
  */
 export function useThemeColorSync() {
     useEffect(() => {
         const themeColor = document.querySelector<HTMLMetaElement>(
             'meta[name="theme-color"]',
-        );
-        const topEdge = document.querySelector<HTMLElement>(
-            '[data-theme-edge="top"]',
-        );
-        const bottomEdge = document.querySelector<HTMLElement>(
-            '[data-theme-edge="bottom"]',
         );
         const sections = Array.from(
             document.querySelectorAll<HTMLElement>("[data-theme-color]"),
@@ -67,16 +61,13 @@ export function useThemeColorSync() {
         const updateThemeColor = () => {
             cancelAnimationFrame(frame);
             frame = requestAnimationFrame(() => {
-                const top = colorAt(sections, 0);
-                const bottom = colorAt(sections, window.innerHeight - 1);
+                const color = colorAt(sections, 0);
+                if (!color) return;
 
-                if (top && themeColor && themeColor.content !== top) {
-                    themeColor.content = top;
+                if (themeColor && themeColor.content !== color) {
+                    themeColor.content = color;
                 }
-                if (top && topEdge) topEdge.style.backgroundColor = top;
-                if (bottom && bottomEdge) {
-                    bottomEdge.style.backgroundColor = bottom;
-                }
+                document.body.style.backgroundColor = color;
             });
         };
 
