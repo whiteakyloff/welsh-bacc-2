@@ -1,34 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import { Icon } from "@/components/ui/Icon";
-import { HOLD_MS, useHeldPress } from "@/hooks/useHeldPress";
+import { useHeldPress } from "@/hooks/useHeldPress";
 import type { Producer } from "@/lib/content";
 import { underlineLink } from "@/lib/linkStyles";
 
 export function ProducerCard({ producer }: { producer: Producer }) {
-    const touched = useRef(false);
-    const redirect = useRef<ReturnType<typeof setTimeout>>(undefined);
-    // Pressing another card (or anything else pressable) cancels the redirect.
-    const pressProps = useHeldPress({
-        onInterrupt: () => clearTimeout(redirect.current),
-    });
-
-    useEffect(() => () => clearTimeout(redirect.current), []);
-
-    // On touch, let the pressed animation play out before leaving the page.
-    // Opening a new tab after a delay gets popup-blocked (Safari only allows
-    // it ~1s after a tap), so the delayed redirect stays in this tab.
-    const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        if (!touched.current) return;
-        event.preventDefault();
-        clearTimeout(redirect.current);
-        redirect.current = setTimeout(
-            () => window.location.assign(producer.link),
-            HOLD_MS,
-        );
-    };
+    const pressProps = useHeldPress();
 
     return (
         // The whole card is clickable: the link's overlay below covers it, so a
@@ -76,10 +55,6 @@ export function ProducerCard({ producer }: { producer: Producer }) {
                     target="_blank"
                     rel="noreferrer"
                     className="mt-4 inline-block"
-                    onPointerDown={(event) => {
-                        touched.current = event.pointerType === "touch";
-                    }}
-                    onClick={handleClick}
                 >
                     <span
                         className={`${underlineLink} group-hover:[&_span]:translate-x-0.5 group-hover:[&_span]:-translate-y-0.5 group-active:[&_span]:translate-x-1 group-active:[&_span]:-translate-y-1 group-data-pressed:[&_span]:translate-x-1 group-data-pressed:[&_span]:-translate-y-1`}
