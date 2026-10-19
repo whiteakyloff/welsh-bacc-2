@@ -23,7 +23,7 @@
     --animate-dragon-float: dragon-float 7s ease-in-out infinite;
     --animate-pulse-mark: pulse-mark 2.5s ease-in-out infinite;
     /* Sparkle: pops, flickers and settles. Plays once per hover/press. */
-    --animate-twinkle: twinkle 0.9s ease-in-out both;
+    --animate-twinkle: twinkle 0.5s ease-in-out both;
     /* Fast spin that grows, then shrinks back as it winds down; lasts as long
        as the held press (HOLD_MS in useHeldPress). */
     --animate-spin-burst:
@@ -87,14 +87,12 @@
     }
     @keyframes twinkle {
         25% {
-            transform: scale(1.35);
+            transform: scale(1.2);
         }
         50% {
-            transform: scale(0.85);
             opacity: 0.5;
         }
         75% {
-            transform: scale(1.12);
             opacity: 1;
         }
     }
