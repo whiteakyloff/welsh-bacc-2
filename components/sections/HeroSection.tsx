@@ -32,7 +32,7 @@ export function HeroSection() {
                 <div className="mt-[35px] flex items-center gap-[25px] max-[1023px]:flex-wrap max-[1023px]:gap-[18px_24px] animate-item-in [animation-delay:420ms]">
                     <ScrollButton
                         target="discover"
-                        className="inline-flex cursor-pointer items-center gap-5 rounded border-0 px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform hover:[&_span]:translate-y-1 bg-gold text-ink"
+                        className="inline-flex cursor-pointer items-center gap-5 rounded border-0 px-[22px] py-[15px] text-xs font-bold tracking-[.03em] transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg [&_span]:transition-transform bg-gold text-ink"
                     >
                         Discover Welsh food <Icon name="arrow_downward" />
                     </ScrollButton>
