@@ -159,32 +159,18 @@
     }
 }
 
-/* Material Symbols (font from the material-symbols package) */
-@font-face {
-    font-family: "Material Symbols Outlined";
-    font-style: normal;
-    font-weight: 100 700;
-    font-display: block;
-    src: url("../node_modules/material-symbols/material-symbols-outlined.woff2")
-        format("woff2");
-}
-
+/* Inline SVG icons (see components/ui/Icon.tsx). Sized like the old icon font:
+   1.25em box sitting on the text baseline. */
 @layer base {
-    .material-symbols-outlined {
+    .icon {
         display: inline-block;
-        font-family: "Material Symbols Outlined";
-        font-weight: normal;
-        font-style: normal;
         font-size: 1.25em;
         line-height: 1;
-        letter-spacing: normal;
-        text-transform: none;
-        white-space: nowrap;
-        word-wrap: normal;
-        direction: ltr;
         vertical-align: -0.25em;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        font-feature-settings: "liga";
+    }
+    .icon > svg {
+        display: block;
+        width: 1em;
+        height: 1em;
     }
 }
