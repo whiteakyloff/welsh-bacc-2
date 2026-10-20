@@ -174,3 +174,11 @@
         height: 1em;
     }
 }
+
+/* Footer logo seal (see SiteFooter). Kept outside @theme so it is always
+   emitted for the arbitrary animate-[seal-turn_…] utility. */
+@keyframes seal-turn {
+    to {
+        rotate: 1turn;
+    }
+}

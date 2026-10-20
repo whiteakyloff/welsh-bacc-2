@@ -1,10 +1,7 @@
 import type { CSSProperties } from "react";
 
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Icon } from "@/components/ui/Icon";
-import { ScrollButton } from "@/components/ui/ScrollButton";
 import { aboutSteps } from "@/lib/content";
-import { underlineLink } from "@/lib/linkStyles";
 import { reveal } from "@/lib/reveal";
 import { sectionColors } from "@/lib/theme";
 
@@ -31,28 +28,18 @@ export function AboutSection() {
                     <em>what’s on your plate.</em>
                 </h2>
                 <div>
-                    <p className="!mt-0 font-display !text-[21px] !leading-[1.45] !text-ink">
+                    <p className="font-display text-[21px] leading-[1.45] text-ink max-[800px]:text-[19px]">
                         Eat Welsh, Eat Well encourages people in Wales to buy
                         locally produced food more often and make healthier,
                         informed choices.
                     </p>
-                    <p className="mt-0 max-w-[480px] text-[15px] leading-[1.75] text-muted">
+                    <p className="mt-[18px] max-w-[480px] text-[15px] leading-[1.75] text-muted">
                         It is a campaign about noticing what is around us: the
                         farmers, food producers and local businesses that bring
                         Welsh food to our tables. Through digital content,
                         community activity and this website, we want to make
                         discovering local food feel easy and welcoming.
                     </p>
-                    <ScrollButton
-                        target="why-welsh"
-                        className="group mt-[15px] block cursor-pointer border-0 bg-transparent p-0"
-                    >
-                        <span
-                            className={`${underlineLink} group-hover:[&_span]:translate-x-1 group-active:[&_span]:translate-x-1.5 group-data-pressed:[&_span]:translate-x-1.5`}
-                        >
-                            Why choose Welsh? <Icon name="arrow_forward" />
-                        </span>
-                    </ScrollButton>
                 </div>
             </div>
             <div className="mt-[76px] grid grid-cols-3 gap-[4%] border-t border-line pt-[22px] max-[800px]:mt-[50px] max-[800px]:flex max-[800px]:flex-col max-[800px]:gap-[18px] max-[800px]:border-0 max-[800px]:pt-0">

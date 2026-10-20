@@ -1,4 +1,4 @@
-// Underlined text link, used by "Learn more" and "Why choose Welsh?". Put it
+// Underlined text link, used by "Learn more". Put it
 // inside a `group`: the grey underline gets a red bar that grows on group
 // hover, and both :active and the held touch press (data-pressed, see
 // useHeldPress) show a pressed state. Arrow motion is left to each caller.
