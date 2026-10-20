@@ -10,10 +10,12 @@ export function ProducerCard({ producer }: { producer: Producer }) {
     const pressProps = useHeldPress();
 
     return (
-        // The whole card is clickable: the link's overlay below covers it, so a
-        // tap anywhere on the card lifts it and opens the producer's site.
+        // On desktop only the "Learn more" button is interactive: the card
+        // ignores the pointer, so its hover effects run only while the button is
+        // hovered. On phones the button's overlay covers the whole card, so a tap
+        // anywhere lifts it and opens the producer's site.
         <article
-            className="group relative h-full overflow-hidden rounded-[3px] bg-paper text-ink transition-[translate,box-shadow,scale] duration-[350ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_18px_30px_rgba(15,43,31,.2)] active:scale-[0.98] active:duration-100 data-pressed:-translate-y-2 data-pressed:shadow-[0_18px_30px_rgba(15,43,31,.2)]"
+            className="group pointer-events-none relative flex h-full flex-col max-[800px]:pointer-events-auto overflow-hidden rounded-[3px] bg-paper text-ink transition-[translate,box-shadow,scale] duration-[350ms] ease-in-out hover:-translate-y-2 hover:shadow-[0_18px_30px_rgba(15,43,31,.2)] active:scale-[0.98] active:duration-100 data-pressed:-translate-y-2 data-pressed:shadow-[0_18px_30px_rgba(15,43,31,.2)]"
             {...pressProps}
         >
             <div
@@ -42,31 +44,36 @@ export function ProducerCard({ producer }: { producer: Producer }) {
                     {producer.category}
                 </span>
             </div>
-            <div className="px-[23px] pb-[26px] pt-[23px] max-[1100px]:px-[18px] max-[1100px]:pb-[23px]">
+            <div className="flex flex-1 flex-col px-[23px] pb-[26px] pt-[23px] max-[1100px]:px-[18px] max-[1100px]:pb-[23px]">
                 <p className="mb-[11px] text-[10px] font-bold uppercase tracking-[.14em] text-[#9a6f4b]">
                     {producer.location}
                 </p>
-                <h3 className="mb-3 font-display text-[25px] font-normal">
+                <h3 className="mb-3 min-h-[2lh] font-display text-[25px] font-normal leading-[1.15] max-[800px]:min-h-0">
                     {producer.name}
                 </h3>
-                <p className="text-xs leading-[1.6]">{producer.description}</p>
-                <a
-                    href={producer.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 inline-block"
+                <p className="mb-4 text-xs leading-[1.6]">{producer.description}</p>
+                <button
+                    type="button"
+                    onClick={() =>
+                        window.open(
+                            producer.link,
+                            "_blank",
+                            "noopener,noreferrer",
+                        )
+                    }
+                    className="pointer-events-auto mt-auto self-start cursor-pointer border-0 bg-transparent p-0"
                 >
                     <span
                         className={`${underlineLink} group-hover:[&_span]:translate-x-0.5 group-hover:[&_span]:-translate-y-0.5 group-active:[&_span]:translate-x-1 group-active:[&_span]:-translate-y-1 group-data-pressed:[&_span]:translate-x-1 group-data-pressed:[&_span]:-translate-y-1`}
                     >
                         Learn more <Icon name="arrow_outward" />
                     </span>
-                    {/* Stretches the link over the whole card (the <a> itself isn't positioned) */}
+                    {/* Phones: stretches the button over the whole card (the button itself isn't positioned) */}
                     <span
                         aria-hidden="true"
-                        className="absolute inset-0 z-20"
+                        className="absolute inset-0 z-20 hidden max-[800px]:block"
                     />
-                </a>
+                </button>
             </div>
         </article>
     );

@@ -8,7 +8,9 @@ const basePath =
 const nextConfig: NextConfig = {
     /* config options here */
     output: "export",
-    images: {
+    
+    allowedDevOrigins: ['192.168.0.93'],
+      images: {
         unoptimized: true,
     },
     basePath,

@@ -2,17 +2,21 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon } from "@/components/ui/Icon";
 import { PressableDiv } from "@/components/ui/PressableDiv";
 import { eatWellTips } from "@/lib/content";
-import { reveal } from "@/lib/reveal";
+import { reveal, revealBase, revealDelay } from "@/lib/reveal";
 import { sectionColors } from "@/lib/theme";
 
 export function EatWellSection() {
     return (
         <section
             data-theme-color={sectionColors.coral}
-            data-reveal
-            className={`bg-[#d95348] text-white ${reveal}`}
+            className="bg-[#d95348] text-white"
         >
-            <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-[14%] px-[9vw] py-[88px] max-[1100px]:gap-[8%] max-[1100px]:px-[7vw] max-[800px]:grid-cols-1 max-[800px]:gap-[45px] max-[800px]:py-[70px]">
+            {/* Reveal the content, not the section, so the coral background
+                doesn't fade in over the page. */}
+            <div
+                data-reveal
+                className={`mx-auto grid max-w-[1440px] grid-cols-2 gap-[14%] px-[9vw] py-[88px] max-[1100px]:gap-[8%] max-[1100px]:px-[7vw] max-[800px]:grid-cols-1 max-[800px]:gap-[45px] max-[800px]:py-[70px] ${reveal}`}
+            >
                 <div>
                     <Eyebrow>04 / Eat well</Eyebrow>
                     <h2 className="mt-5 font-display text-[clamp(40px,5vw,65px)] font-normal leading-[.98] tracking-[-.05em] [&_em]:text-[#f5c978]">
@@ -27,10 +31,12 @@ export function EatWellSection() {
                     </p>
                 </div>
                 <div className="border-t border-white/35">
-                    {eatWellTips.map((tip) => (
+                    {eatWellTips.map((tip, index) => (
                         <PressableDiv
                             key={tip.title}
-                            className="group grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px] transition-[background-color,padding] duration-300 ease-out hover:bg-white/[.06] hover:pl-3 data-pressed:bg-white/10 data-pressed:pl-3 data-pressed:duration-200"
+                            data-reveal
+                            className={`group grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-white/[.06] hover:pl-3 data-pressed:bg-white/10 data-pressed:pl-3 data-pressed:delay-0 data-pressed:duration-200`}
+                            style={revealDelay(index)}
                         >
                             <Icon
                                 name="star_shine"

@@ -3,9 +3,9 @@ import type { CSSProperties } from "react";
 // Scroll reveal settings — tweak these to change how sections appear.
 export const revealSettings = {
     // Positive bottom margin starts the reveal before the element enters the screen.
-    rootMargin: "0px 0px 5% 0px",
+    rootMargin: "0px 0px -5% 0px",
     threshold: 0,
-    duration: 500, // ms
+    duration: 400, // ms
     distance: 16, // px the element slides up from
     stagger: 50, // ms between items in a list (cards, reasons)
     easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",

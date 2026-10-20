@@ -18,18 +18,28 @@ export const navLinks: { target: SectionId; label: string }[] = [
     { target: "get-involved", label: "Get involved" },
 ];
 
-export const aboutSteps = [
+export type AboutStep = {
+    title: string;
+    text: string;
+    /** Tailwind background class for the step's card in the mobile stack. */
+    accentClassName: string;
+};
+
+export const aboutSteps: AboutStep[] = [
     {
         title: "Discover",
         text: "Find the Welsh producers and products near you.",
+        accentClassName: "max-[800px]:bg-deep-green",
     },
     {
         title: "Choose",
         text: "Make food choices that work for you and your budget.",
+        accentClassName: "max-[800px]:bg-[#2f5a6e]",
     },
     {
         title: "Support",
         text: "Help local businesses and communities thrive.",
+        accentClassName: "max-[800px]:bg-[#d95348]",
     },
 ];
 
