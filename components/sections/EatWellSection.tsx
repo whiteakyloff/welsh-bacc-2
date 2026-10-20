@@ -35,7 +35,7 @@ export function EatWellSection() {
                         <PressableDiv
                             key={tip.title}
                             data-reveal
-                            className={`group grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-white/[.06] hover:pl-3 data-pressed:bg-white/10 data-pressed:pl-3 data-pressed:delay-0 data-pressed:duration-200`}
+                            className={`group grid grid-cols-[35px_1fr] border-b border-white/35 py-[19px] ${revealBase} transition-[opacity,translate,background-color,padding] pr-3 hover:bg-white/[.06] hover:pl-3 hover:pr-0 data-pressed:bg-white/10 data-pressed:pl-3 data-pressed:pr-0 data-pressed:delay-0 data-pressed:duration-200`}
                             style={revealDelay(index)}
                         >
                             <Icon

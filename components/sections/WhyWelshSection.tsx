@@ -29,7 +29,7 @@ export function WhyWelshSection() {
                 {reasons.map((reason, index) => (
                     <PressableDiv
                         data-reveal
-                        className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] ${revealBase} transition-[opacity,translate,background-color,padding] hover:bg-welsh-green/5 hover:pl-[14px] data-pressed:bg-welsh-green/5 data-pressed:pl-[14px] data-pressed:delay-0 data-pressed:duration-200`}
+                        className={`group grid grid-cols-[100px_1.1fr_1.3fr_30px] items-center gap-[25px] border-b border-line py-[25px] max-[800px]:grid-cols-[35px_1fr_20px] max-[800px]:gap-[10px] ${revealBase} transition-[opacity,translate,background-color,padding] pr-[14px] hover:bg-welsh-green/5 hover:pl-[14px] hover:pr-0 data-pressed:bg-welsh-green/5 data-pressed:pl-[14px] data-pressed:pr-0 data-pressed:delay-0 data-pressed:duration-200`}
                         style={revealDelay(index)}
                         key={reason.title}
                     >
