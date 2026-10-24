@@ -22,6 +22,8 @@
     --animate-sun-breathe: sun-breathe 10s ease-in-out infinite;
     --animate-dragon-float: dragon-float 7s ease-in-out infinite;
     --animate-pulse-mark: pulse-mark 2.5s ease-in-out infinite;
+    /* Ring that ripples out from the selected pin on the producer map. */
+    --animate-pin-pulse: pin-pulse 1.8s ease-out infinite;
     /* Sparkle: pops, flickers and settles. Plays once per hover/press. */
     --animate-twinkle: twinkle 0.5s ease-in-out both;
     /* Fast spin that grows, then shrinks back as it winds down; lasts as long
@@ -106,6 +108,16 @@
         15%,
         65% {
             scale: 1.5;
+        }
+    }
+    @keyframes pin-pulse {
+        from {
+            opacity: 0.7;
+            scale: 1;
+        }
+        to {
+            opacity: 0;
+            scale: 2.8;
         }
     }
     @keyframes pulse-mark {

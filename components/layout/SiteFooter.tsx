@@ -1,13 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
+import { CookieSettingsButton } from "@/components/analytics/CookieSettingsButton";
+import { Icon } from "@/components/ui/Icon";
 import { ScrollButton } from "@/components/ui/ScrollButton";
 import logo from "@/images/logo-header.webp";
 import { sectionColors } from "@/lib/theme";
+
+// Matches the hero's "Our story" link: bold text, gold arrow that slides on hover.
+const footerLink =
+    "inline-flex items-center opacity-90 transition-opacity hover:opacity-100 [&_span]:ml-2 [&_span]:text-[17px] [&_span]:text-[#f1be69] [&_span]:transition-[margin] hover:[&_span]:ml-3";
 
 export function SiteFooter() {
     return (
         <footer
             data-theme-color={sectionColors.deepGreen}
-            className="flex items-center gap-4 bg-deep-green px-[9vw] py-10 text-white max-[800px]:px-[7vw] max-[800px]:py-[35px]"
+            className="flex flex-wrap items-center gap-4 bg-deep-green px-[9vw] py-10 text-white max-[800px]:px-[7vw] max-[800px]:py-[35px]"
         >
             {/* Back to top: the header isn't sticky, so this saves a long scroll up. */}
             <ScrollButton
@@ -26,6 +33,19 @@ export function SiteFooter() {
                     <span className="text-[#9caf9f]">© 2026</span>
                 </span>
             </div>
+            <nav
+                aria-label="Legal"
+                className="ml-auto flex flex-wrap gap-x-7 gap-y-3 text-xs font-bold tracking-[.03em] max-[800px]:ml-0 max-[800px]:mt-2 max-[800px]:w-full"
+            >
+                <Link href="/privacy" className={footerLink}>
+                    Privacy policy <Icon name="arrow_forward" />
+                </Link>
+                <CookieSettingsButton
+                    className={`cursor-pointer border-0 bg-transparent p-0 text-white ${footerLink}`}
+                >
+                    Cookie settings <Icon name="arrow_forward" />
+                </CookieSettingsButton>
+            </nav>
         </footer>
     );
 }

@@ -2,10 +2,10 @@ import { PageEffects } from "@/components/PageEffects";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { DiscoverSection } from "@/components/sections/DiscoverSection";
 import { EatWellSection } from "@/components/sections/EatWellSection";
 import { GetInvolvedSection } from "@/components/sections/GetInvolvedSection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { ProducerMapSection } from "@/components/sections/ProducerMapSection";
 import { WhyWelshSection } from "@/components/sections/WhyWelshSection";
 import { revealVars } from "@/lib/reveal";
 
@@ -16,7 +16,7 @@ export default function Home() {
             <SiteHeader />
             <HeroSection />
             <AboutSection />
-            <DiscoverSection />
+            <ProducerMapSection />
             <WhyWelshSection />
             <EatWellSection />
             <GetInvolvedSection />

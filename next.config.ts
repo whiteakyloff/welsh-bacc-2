@@ -8,9 +8,12 @@ const basePath =
 const nextConfig: NextConfig = {
     /* config options here */
     output: "export",
-    
-    allowedDevOrigins: ['192.168.0.93'],
-      images: {
+    // Emit privacy/index.html rather than privacy.html next to a privacy/
+    // folder, which GitHub Pages would answer with a 404.
+    trailingSlash: true,
+
+    allowedDevOrigins: ["192.168.0.93"],
+    images: {
         unoptimized: true,
     },
     basePath,

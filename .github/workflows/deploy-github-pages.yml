@@ -38,6 +38,10 @@ jobs:
 
             - name: Build project
               run: pnpm build
+              env:
+                  # Microsoft Clarity project ID. Not a secret: it ships in the
+                  # page's HTML. Matches .env, which isn't committed.
+                  NEXT_PUBLIC_CLARITY_PROJECT_ID: z2r01xeoae
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v5
